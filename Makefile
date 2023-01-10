@@ -14,6 +14,7 @@ SRC_ENCODER			=	encoder.c \
 						huffman_code.c \
 						lst_clear.c \
 						clear_tree.c \
+						get_text.c \
 						
 
 

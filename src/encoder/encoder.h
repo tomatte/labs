@@ -4,6 +4,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <string.h>
 # include "../../libft/libftprintf.h"
 
 typedef struct	s_lst
@@ -40,5 +41,6 @@ t_tree	**get_nodes(t_lst *frequency);
 void	order_nodes(t_tree **nodes, int size);
 t_tree	*create_tree(t_tree **nodes, int size);
 void	huffman_code(t_tree *tree, char *bits, t_lst *lst);
+char	*get_text(char *filename);
 
 #endif

@@ -6,12 +6,11 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 08:29:46 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/10 10:31:02 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/10 12:10:31 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../encoder.h"
-#include <string.h>
 
 static char	*join_and_free(char *s1, char *s2)
 {
@@ -39,20 +38,3 @@ void	huffman_code(t_tree *tree, char *bits, t_lst *lst)
 	huffman_code(tree->right, join_and_free(bits, strdup("1")), lst);
 	free(bits);
 }
-
-/*
-
-	bits == ""
-
-	bits == "" + "0"
-	free("")
-	free("0")
-
-	bits == "0" + "0"
-	free2
-
-	bits == "00" + "1"
-	free2
-
-
-  */

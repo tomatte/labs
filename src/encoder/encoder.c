@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 18:44:58 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/10 11:54:52 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/10 12:14:43 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ static void	print_tree(t_tree *tree)
 	print_tree(tree->right);
 }
 
-static void	clear_all(t_lst *lst, t_tree *tree, t_tree **nodes)
+static void	clear_all(t_lst *lst, t_tree *tree, t_tree **nodes, char *text)
 {
+	free(text);
 	free(nodes);
 	lst_clear(lst);
 	clear_tree(tree);
@@ -63,15 +64,17 @@ int	main(int argc, char **argv)
 	t_lst	*frequency;
 	t_tree	**nodes;
 	t_tree	*master;
+	char	*text;
 
 	if (argc <= 1)
 		exit_error();
-	frequency = get_frequency(argv[1]);
+	text = get_text(argv[1]);
+	frequency = get_frequency(text);
 	nodes = get_nodes(frequency);
 	master = create_tree(nodes, lst_size(frequency));
 	huffman_code(master, ft_strdup(""), frequency);
 	print_lst(frequency);
-	clear_all(frequency, master, nodes);
+	clear_all(frequency, master, nodes, text);
 	//print_tree(master);
 	return (0);
 }
