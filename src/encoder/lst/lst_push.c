@@ -1,39 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   encoder.c                                          :+:      :+:    :+:   */
+/*   lst_push.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 18:44:58 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/09 22:04:19 by dbrandao         ###   ########.fr       */
+/*   Created: 2023/01/09 21:08:15 by dbrandao          #+#    #+#             */
+/*   Updated: 2023/01/09 21:11:09 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./encoder.h"
+#include "../encoder.h"
 
-static void	exit_error(void)
+void	lst_push(t_lst *lst, t_lst *node)
 {
-	printf("Needs a filename!\n");
-	exit(1);
-}
-
-static void	print_lst(t_lst *lst)
-{
-	while (lst)
-	{
-		printf("%c\t(%d)\n", lst->c, lst->times);
+	if (!lst || !node)
+		return ;
+	while (lst->next)
 		lst = lst->next;
-	}
-}
-
-int	main(int argc, char **argv)
-{
-	t_lst	*frequency;
-
-	if (argc <= 1)
-		exit_error();
-	frequency = get_frequency(argv[1]);
-	print_lst(frequency);
-	return (0);
+	lst->next = node;
 }

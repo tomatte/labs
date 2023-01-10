@@ -1,10 +1,11 @@
 #------------------- encoder ------------------------
 
 SRC_ENCODER			=	encoder.c \
-						frequency.c \
 						read_file.c \
 						lst_new.c \
 						lst_find.c \
+						lst_push.c \
+						get_frequency.c \
 
 
 OBJS_DIR_ENCODER		=	objects_encoder
@@ -39,6 +40,7 @@ NAME		=	minitalk
 VPATH				=	./src/encoder \
 						./src/decoder \
 						./src/encoder/lst \
+						./src/encoder/others \
 
 $(OBJS_DIR_ENCODER)/%.o:	%.c
 							$(CC) $(CFLAGS) -c $< -o $@

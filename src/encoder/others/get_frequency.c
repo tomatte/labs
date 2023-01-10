@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   frequency.c                                        :+:      :+:    :+:   */
+/*   get_frequency.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 19:39:19 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/09 21:02:26 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/09 22:03:32 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./encoder.h"
+#include "../encoder.h"
 
 static char	*get_text(char *filename)
 {
@@ -24,14 +24,26 @@ static char	*get_text(char *filename)
 	return (text);
 }
 
-void	frequency(char *filename)
+t_lst	*get_frequency(char *filename)
 {
 	char	*text;
+	int		i;
 	t_lst	*frequency;
+	t_lst	*node;
 
 	text = get_text(filename);
-	printf("%s\n\n", text);
-	frequency = lst_new('w');
-	frequency->next = lst_new('z');
-	printf("letter: %c\n", lst_find(frequency, 'w')->c);
+	if (!text || !*text)
+		return (NULL);
+	frequency = lst_new(*text);
+	i = 1;
+	while (text[i])
+	{
+		node = lst_find(frequency, text[i]);
+		if (!node)
+			lst_push(frequency, lst_new(text[i]));
+		else
+			node->times++;
+		i++;
+	}
+	return (frequency);
 }

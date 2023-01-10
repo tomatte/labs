@@ -1,39 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   encoder.c                                          :+:      :+:    :+:   */
+/*   lst_new.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 18:44:58 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/09 22:04:19 by dbrandao         ###   ########.fr       */
+/*   Created: 2023/01/09 20:41:48 by dbrandao          #+#    #+#             */
+/*   Updated: 2023/01/09 20:45:14 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./encoder.h"
+#include "../encoder.h"
 
-static void	exit_error(void)
+t_lst	*lst_new(char c)
 {
-	printf("Needs a filename!\n");
-	exit(1);
-}
+	t_lst	*new;
 
-static void	print_lst(t_lst *lst)
-{
-	while (lst)
-	{
-		printf("%c\t(%d)\n", lst->c, lst->times);
-		lst = lst->next;
-	}
-}
-
-int	main(int argc, char **argv)
-{
-	t_lst	*frequency;
-
-	if (argc <= 1)
-		exit_error();
-	frequency = get_frequency(argv[1]);
-	print_lst(frequency);
-	return (0);
+	new = (t_lst *) malloc(sizeof(t_lst));
+	new->c = c;
+	new->times = 1;
+	new->next = NULL;
+	return (new);
 }
