@@ -15,7 +15,7 @@ SRC_ENCODER			=	encoder.c \
 						lst_clear.c \
 						clear_tree.c \
 						get_text.c \
-						
+						encode_text.c \
 
 
 OBJS_DIR_ENCODER		=	objects_encoder

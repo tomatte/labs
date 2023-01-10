@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 18:44:58 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/10 12:14:43 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/10 12:23:23 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	main(int argc, char **argv)
 	t_tree	**nodes;
 	t_tree	*master;
 	char	*text;
+	char	*encoded;
 
 	if (argc <= 1)
 		exit_error();
@@ -74,6 +75,8 @@ int	main(int argc, char **argv)
 	master = create_tree(nodes, lst_size(frequency));
 	huffman_code(master, ft_strdup(""), frequency);
 	print_lst(frequency);
+	encoded = encode_text(frequency, text);
+	printf("encoded: %s\n", encoded);
 	clear_all(frequency, master, nodes, text);
 	//print_tree(master);
 	return (0);

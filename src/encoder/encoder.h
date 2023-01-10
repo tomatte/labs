@@ -42,5 +42,6 @@ void	order_nodes(t_tree **nodes, int size);
 t_tree	*create_tree(t_tree **nodes, int size);
 void	huffman_code(t_tree *tree, char *bits, t_lst *lst);
 char	*get_text(char *filename);
+char	*encode_text(t_lst *frequency, char *text);
 
 #endif
