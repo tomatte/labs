@@ -11,6 +11,7 @@ SRC_ENCODER			=	encoder.c \
 						get_nodes.c \
 						order_nodes.c \
 						create_tree.c \
+						huffman_code.c \
 						
 
 

@@ -9,6 +9,7 @@
 typedef struct	s_lst
 {
 	char				c;
+	char				*code;
 	int					times;
 	struct s_lst	*next;
 }	t_lst;
@@ -36,5 +37,6 @@ char	*read_file(int fd);
 t_tree	**get_nodes(t_lst *frequency);
 void	order_nodes(t_tree **nodes, int size);
 t_tree	*create_tree(t_tree **nodes, int size);
+void	huffman_code(t_tree *tree, char *bits, t_lst *lst);
 
 #endif
