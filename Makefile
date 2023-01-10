@@ -9,6 +9,8 @@ SRC_ENCODER			=	encoder.c \
 						get_frequency.c \
 						new_node.c \
 						get_nodes.c \
+						order_nodes.c \
+						create_tree.c \
 						
 
 

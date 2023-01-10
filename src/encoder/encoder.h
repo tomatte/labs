@@ -34,5 +34,7 @@ t_tree	*new_node(char c, int times);
 t_lst	*get_frequency(char *filename);
 char	*read_file(int fd);
 t_tree	**get_nodes(t_lst *frequency);
+void	order_nodes(t_tree **nodes, int size);
+t_tree	*create_tree(t_tree **nodes, int size);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 18:44:58 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/09 23:14:52 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/10 07:57:05 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,29 @@ static void	print_nodes(t_tree **nodes, int size)
 	}
 }
 
+static void	print_tree(t_tree *tree)
+{
+	if (!tree)
+		return ;
+	if (tree->c > 0)
+	{
+		printf("%c\t(%d)\n", tree->c, tree->times);
+	}
+	print_tree(tree->left);
+	print_tree(tree->right);
+}
+
 int	main(int argc, char **argv)
 {
 	t_lst	*frequency;
 	t_tree	**nodes;
+	t_tree	*master;
 
 	if (argc <= 1)
 		exit_error();
 	frequency = get_frequency(argv[1]);
 	nodes = get_nodes(frequency);
-	print_nodes(nodes, lst_size(frequency));
+	master = create_tree(nodes, lst_size(frequency));
+	print_tree(master);
 	return (0);
 }
