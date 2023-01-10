@@ -1,28 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   encoder.c                                          :+:      :+:    :+:   */
+/*   ft_uitoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 18:44:58 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/09 19:47:05 by dbrandao         ###   ########.fr       */
+/*   Created: 2022/07/05 07:04:06 by dbrandao          #+#    #+#             */
+/*   Updated: 2022/07/11 19:03:43 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./encoder.h"
+#include "libft.h"
 
-static void	exit_error(void)
+static int	num_len(unsigned int n)
 {
-	printf("Needs a filename!\n");
-	exit(1);
+	int	i;
+
+	i = 0;
+	if (!n)
+		return (1);
+	while (n)
+	{
+		n /= 10;
+		i++;
+	}
+	return (i);
 }
 
-int	main(int argc, char **argv)
+char	*ft_uitoa(unsigned int n)
 {
-	if (argc <= 1)
-		exit_error();
-	frequency(argv[1]);
-	printf("encoder!\n");
-	return (0);
+	char	*s_num;
+	int		len;
+
+	len = num_len(n);
+	s_num = (char *) malloc(sizeof(char) * len + 1);
+	if (!s_num)
+		return (NULL);
+	s_num[len] = '\0';
+	while (--len >= 0)
+	{
+		s_num[len] = (n % 10) + 48;
+		n /= 10;
+	}
+	return (s_num);
 }

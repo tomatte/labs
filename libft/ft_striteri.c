@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   encoder.c                                          :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 18:44:58 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/09 19:47:05 by dbrandao         ###   ########.fr       */
+/*   Created: 2022/06/19 19:22:55 by dbrandao          #+#    #+#             */
+/*   Updated: 2022/06/26 20:03:07 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./encoder.h"
-
-static void	exit_error(void)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	printf("Needs a filename!\n");
-	exit(1);
-}
+	unsigned int	i;
 
-int	main(int argc, char **argv)
-{
-	if (argc <= 1)
-		exit_error();
-	frequency(argv[1]);
-	printf("encoder!\n");
-	return (0);
+	if (!s || !f)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		f(i, &s[i]);
+		i++;
+	}
 }

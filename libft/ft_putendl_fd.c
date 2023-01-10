@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   encoder.c                                          :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 18:44:58 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/09 19:47:05 by dbrandao         ###   ########.fr       */
+/*   Created: 2022/06/19 20:03:46 by dbrandao          #+#    #+#             */
+/*   Updated: 2022/07/01 21:05:52 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./encoder.h"
+#include "libft.h"
 
-static void	exit_error(void)
+void	ft_putendl_fd(char *s, int fd)
 {
-	printf("Needs a filename!\n");
-	exit(1);
-}
-
-int	main(int argc, char **argv)
-{
-	if (argc <= 1)
-		exit_error();
-	frequency(argv[1]);
-	printf("encoder!\n");
-	return (0);
+	if (!s)
+		return ;
+	while (*s)
+		write(fd, s++, 1);
+	write(fd, "\n", 1);
 }

@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   encoder.c                                          :+:      :+:    :+:   */
+/*   ft_issign.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 18:44:58 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/09 19:47:05 by dbrandao         ###   ########.fr       */
+/*   Created: 2022/10/27 18:38:18 by dbrandao          #+#    #+#             */
+/*   Updated: 2022/10/27 18:38:18 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./encoder.h"
-
-static void	exit_error(void)
+int	ft_issign(char c)
 {
-	printf("Needs a filename!\n");
-	exit(1);
-}
-
-int	main(int argc, char **argv)
-{
-	if (argc <= 1)
-		exit_error();
-	frequency(argv[1]);
-	printf("encoder!\n");
+	if (c == '-' || c == '+')
+		return (1);
 	return (0);
 }

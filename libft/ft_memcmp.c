@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   encoder.c                                          :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 18:44:58 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/09 19:47:05 by dbrandao         ###   ########.fr       */
+/*   Created: 2022/06/06 05:30:18 by dbrandao          #+#    #+#             */
+/*   Updated: 2022/07/01 21:04:41 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./encoder.h"
+#include "libft.h"
 
-static void	exit_error(void)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	printf("Needs a filename!\n");
-	exit(1);
-}
+	size_t			i;
+	unsigned char	*c1;
+	unsigned char	*c2;
 
-int	main(int argc, char **argv)
-{
-	if (argc <= 1)
-		exit_error();
-	frequency(argv[1]);
-	printf("encoder!\n");
-	return (0);
+	c1 = (unsigned char *) s1;
+	c2 = (unsigned char *) s2;
+	i = 0;
+	if (!n)
+		return (0);
+	while (i + 1 < n)
+	{
+		if (c1[i] != c2[i])
+			return (c1[i] - c2[i]);
+		i++;
+	}
+	return (c1[i] - c2[i]);
 }

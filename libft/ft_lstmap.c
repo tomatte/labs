@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   frequency.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 19:39:19 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/09 21:02:26 by dbrandao         ###   ########.fr       */
+/*   Created: 2022/06/20 21:31:38 by dbrandao          #+#    #+#             */
+/*   Updated: 2022/07/01 21:04:15 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./encoder.h"
+#include "libft.h"
 
-static char	*get_text(char *filename)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int		fd;
-	char	*text;
+	t_list	*first;
+	t_list	*aux;
 
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
+	if (!lst || !f)
 		return (NULL);
-	text = read_file(fd);
-	return (text);
-}
-
-void	frequency(char *filename)
-{
-	char	*text;
-	t_lst	*frequency;
-
-	text = get_text(filename);
-	printf("%s\n\n", text);
-	frequency = lst_new('w');
-	frequency->next = lst_new('z');
-	printf("letter: %c\n", lst_find(frequency, 'w')->c);
+	first = ft_lstnew(f(lst->content));
+	if (!first)
+		return (NULL);
+	aux = first;
+	while (lst->next)
+	{
+		aux->next = ft_lstnew(f(lst->next->content));
+		if (!aux->next)
+		{
+			ft_lstclear(&first, del);
+			return (NULL);
+		}
+		aux = aux->next;
+		lst = lst->next;
+	}
+	return (first);
 }

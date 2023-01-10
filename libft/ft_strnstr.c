@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   encoder.c                                          :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 18:44:58 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/09 19:47:05 by dbrandao         ###   ########.fr       */
+/*   Created: 2022/06/06 04:48:39 by dbrandao          #+#    #+#             */
+/*   Updated: 2022/07/01 21:07:09 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./encoder.h"
+#include "libft.h"
 
-static void	exit_error(void)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	printf("Needs a filename!\n");
-	exit(1);
-}
+	size_t	i;
+	size_t	little_len;
 
-int	main(int argc, char **argv)
-{
-	if (argc <= 1)
-		exit_error();
-	frequency(argv[1]);
-	printf("encoder!\n");
-	return (0);
+	i = 0;
+	little_len = ft_strlen(little);
+	if (!*little)
+		return ((char *) big);
+	while (i + little_len <= len && big[i])
+	{
+		if (!ft_strncmp(&big[i], little, little_len))
+			return ((char *)(&big[i]));
+		i++;
+	}
+	return (NULL);
 }

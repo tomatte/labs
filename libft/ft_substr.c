@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   encoder.c                                          :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 18:44:58 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/09 19:47:05 by dbrandao         ###   ########.fr       */
+/*   Created: 2022/06/08 18:12:54 by dbrandao          #+#    #+#             */
+/*   Updated: 2022/07/01 21:07:39 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./encoder.h"
+#include "libft.h"
 
-static void	exit_error(void)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	printf("Needs a filename!\n");
-	exit(1);
-}
+	size_t	start_size;
+	char	*substr;
 
-int	main(int argc, char **argv)
-{
-	if (argc <= 1)
-		exit_error();
-	frequency(argv[1]);
-	printf("encoder!\n");
-	return (0);
+	if (!s || ft_strlen(s) < start + 1)
+		return (ft_strdup(""));
+	start_size = ft_strlen(&s[start]);
+	if (start_size < len)
+		len = start_size;
+	substr = ((char *) malloc(len + 1));
+	if (!substr)
+		return (NULL);
+	ft_strlcpy(substr, &s[start], len + 1);
+	return (substr);
 }

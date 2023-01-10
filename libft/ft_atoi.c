@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   encoder.c                                          :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 18:44:58 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/09 19:47:05 by dbrandao         ###   ########.fr       */
+/*   Created: 2022/06/06 05:54:21 by dbrandao          #+#    #+#             */
+/*   Updated: 2022/10/27 18:11:10 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./encoder.h"
+#include "libft.h"
 
-static void	exit_error(void)
+int	ft_atoi(const char *nptr)
 {
-	printf("Needs a filename!\n");
-	exit(1);
-}
+	int	num;
+	int	sign;
 
-int	main(int argc, char **argv)
-{
-	if (argc <= 1)
-		exit_error();
-	frequency(argv[1]);
-	printf("encoder!\n");
-	return (0);
+	sign = 1;
+	num = 0;
+	while (ft_isspace(*nptr))
+		nptr++;
+	if (*nptr == '-')
+		sign *= -1;
+	if (ft_issign(*nptr))
+		nptr++;
+	while (ft_isdigit(*nptr))
+	{
+		num = num * 10 + (*nptr - 48);
+		nptr++;
+	}
+	return (num * sign);
 }

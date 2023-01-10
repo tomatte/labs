@@ -1,37 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   frequency.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 19:39:19 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/09 21:02:26 by dbrandao         ###   ########.fr       */
+/*   Created: 2022/05/31 21:49:05 by dbrandao          #+#    #+#             */
+/*   Updated: 2022/07/01 21:04:51 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./encoder.h"
+#include "libft.h"
 
-static char	*get_text(char *filename)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	int		fd;
-	char	*text;
+	int				i;
 
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
+	if (!dest && !src)
 		return (NULL);
-	text = read_file(fd);
-	return (text);
-}
-
-void	frequency(char *filename)
-{
-	char	*text;
-	t_lst	*frequency;
-
-	text = get_text(filename);
-	printf("%s\n\n", text);
-	frequency = lst_new('w');
-	frequency->next = lst_new('z');
-	printf("letter: %c\n", lst_find(frequency, 'w')->c);
+	if ((unsigned char *) dest > (unsigned char *) src)
+	{
+		i = (int) n - 1;
+		while (i >= 0)
+		{
+			((unsigned char *) dest)[i] = ((unsigned char *) src)[i];
+			i--;
+		}
+	}
+	else
+	{
+		i = 0;
+		while (i < (int) n)
+		{
+			((unsigned char *) dest)[i] = ((unsigned char *) src)[i];
+			i++;
+		}
+	}
+	return (dest);
 }

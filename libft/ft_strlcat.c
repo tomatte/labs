@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   encoder.c                                          :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 18:44:58 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/09 19:47:05 by dbrandao         ###   ########.fr       */
+/*   Created: 2022/06/04 03:59:22 by dbrandao          #+#    #+#             */
+/*   Updated: 2022/07/01 21:06:33 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./encoder.h"
+#include "libft.h"
 
-static void	exit_error(void)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	printf("Needs a filename!\n");
-	exit(1);
-}
+	size_t	dst_len;
+	size_t	src_len;
+	size_t	i;
+	char	*s;
 
-int	main(int argc, char **argv)
-{
-	if (argc <= 1)
-		exit_error();
-	frequency(argv[1]);
-	printf("encoder!\n");
-	return (0);
+	s = (char *) src;
+	dst_len = ft_strlen(dst);
+	src_len = ft_strlen(src);
+	i = dst_len;
+	while (i + 1 < size && *s)
+	{
+		dst[i] = *s;
+		s++;
+		i++;
+	}
+	dst[i] = '\0';
+	if (dst_len >= size)
+		return (size + src_len);
+	return (dst_len + src_len);
 }

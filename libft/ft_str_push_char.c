@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   encoder.c                                          :+:      :+:    :+:   */
+/*   ft_str_push_char.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 18:44:58 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/09 19:47:05 by dbrandao         ###   ########.fr       */
+/*   Created: 2022/12/12 15:16:41 by dbrandao          #+#    #+#             */
+/*   Updated: 2022/12/12 15:18:01 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./encoder.h"
+#include "./libft.h"
 
-static void	exit_error(void)
+void	ft_str_push_char(char **str, char c)
 {
-	printf("Needs a filename!\n");
-	exit(1);
-}
+	size_t	len;
+	char	*s;
+	char	*new;
 
-int	main(int argc, char **argv)
-{
-	if (argc <= 1)
-		exit_error();
-	frequency(argv[1]);
-	printf("encoder!\n");
-	return (0);
+	s = *str;
+	if (!str || !s || !c)
+		return ;
+	len = ft_strlen(s);
+	new = (char *) malloc(len + 2);
+	if (!new)
+		return ;
+	ft_strlcpy(new, s, len + 1);
+	new[len] = c;
+	new[len + 1] = '\0';
+	free(s);
+	*str = new;
 }

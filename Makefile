@@ -1,6 +1,10 @@
 #------------------- encoder ------------------------
 
 SRC_ENCODER			=	encoder.c \
+						frequency.c \
+						read_file.c \
+						lst_new.c \
+						lst_find.c \
 
 
 OBJS_DIR_ENCODER		=	objects_encoder
@@ -26,12 +30,15 @@ NAME_DECODER			=	decoder
 
 #---------------------------------------------------
 
-CFLAGS		=	-I./
+LIBFT		=	./libft/libftprintf.a
+
+CFLAGS		=	-I./ -g
 
 NAME		=	minitalk
 
 VPATH				=	./src/encoder \
 						./src/decoder \
+						./src/encoder/lst \
 
 $(OBJS_DIR_ENCODER)/%.o:	%.c
 							$(CC) $(CFLAGS) -c $< -o $@
@@ -60,9 +67,11 @@ $(LIBFT):
 
 clean:
 	rm -rf ${OBJS_DIR_ENCODER} ${OBJS_DIR_DECODER}
+	make -C ./libft clean
 
 fclean:	clean
 	rm -f ${NAME_ENCODER} ${NAME_DECODER}
+	make -C ./libft fclean
 
 re: fclean all
 
