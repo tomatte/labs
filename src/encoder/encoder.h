@@ -27,9 +27,11 @@ t_lst	*lst_new(char c);
 t_lst	*lst_find(t_lst *lst, char c);
 void	lst_push(t_lst *lst, t_lst *node);
 int		lst_size(t_lst *lst);
+void	lst_clear(t_lst *lst);
 
 //tree
 t_tree	*new_node(char c, int times);
+void	clear_tree(t_tree *tree);
 
 //others
 t_lst	*get_frequency(char *filename);

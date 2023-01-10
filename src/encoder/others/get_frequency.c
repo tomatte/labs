@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 19:39:19 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/09 22:03:32 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/10 10:22:58 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ t_lst	*get_frequency(char *filename)
 			node->times++;
 		i++;
 	}
+	free(text);
 	return (frequency);
 }
