@@ -5,7 +5,11 @@ SRC_ENCODER			=	encoder.c \
 						lst_new.c \
 						lst_find.c \
 						lst_push.c \
+						lst_size.c \
 						get_frequency.c \
+						new_node.c \
+						get_nodes.c \
+						
 
 
 OBJS_DIR_ENCODER		=	objects_encoder
@@ -41,6 +45,7 @@ VPATH				=	./src/encoder \
 						./src/decoder \
 						./src/encoder/lst \
 						./src/encoder/others \
+						./src/encoder/tree \
 
 $(OBJS_DIR_ENCODER)/%.o:	%.c
 							$(CC) $(CFLAGS) -c $< -o $@
