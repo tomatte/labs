@@ -5,6 +5,9 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <string.h>
+# include <sys/types.h>
+# include <sys/ipc.h>
+# include <sys/shm.h>
 # include "../../libft/libftprintf.h"
 
 typedef struct	s_lst
@@ -22,6 +25,18 @@ typedef struct	s_tree
 	struct s_tree	*left;
 	struct s_tree	*right;
 }	t_tree;
+
+typedef struct	s_data
+{
+	char	*binary;
+	t_lst	*dictionary;
+}	t_data;
+
+typedef struct	s_test
+{
+	char	c;
+	int 	times;
+}	t_test;
 
 //lst
 t_lst	*lst_new(char c);
@@ -43,5 +58,9 @@ t_tree	*create_tree(t_tree **nodes, int size);
 void	huffman_code(t_tree *tree, char *bits, t_lst *lst);
 char	*get_text(char *filename);
 char	*encode_text(t_lst *frequency, char *text);
+char	*encode_to_char(t_lst *frequency, char *text);
+
+//shm
+void	share_memory(char *binary, t_lst *frequency);
 
 #endif

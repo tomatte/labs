@@ -16,6 +16,7 @@ SRC_ENCODER			=	encoder.c \
 						clear_tree.c \
 						get_text.c \
 						encode_text.c \
+						share_memory.c \
 
 
 OBJS_DIR_ENCODER		=	objects_encoder
@@ -29,6 +30,7 @@ NAME_ENCODER			=	encoder
 #------------------- decoder ------------------------
 
 SRC_DECODER			=	decoder.c \
+						read_memory.c \
 						
 
 
@@ -52,6 +54,8 @@ VPATH				=	./src/encoder \
 						./src/encoder/lst \
 						./src/encoder/others \
 						./src/encoder/tree \
+						./src/encoder/shm \
+						./src/decoder/others \
 
 $(OBJS_DIR_ENCODER)/%.o:	%.c
 							$(CC) $(CFLAGS) -c $< -o $@
