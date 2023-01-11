@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 08:00:57 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/11 14:21:03 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/11 17:47:48 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static key_t	get_key()
 {
 	key_t	key;
 
-	key = ftok("./src/encoder/encoder.c", 1);
+	key = ftok("./src/encoder/encoder.h", 1);
 	if (key < 0)
 	{
 		printf("Key error!\n");
@@ -42,11 +42,14 @@ void	share_memory(char *binary, t_lst *frequency)
 {
 	int		shmid;
 	key_t	key;
-	void	*buff;
-	t_data	data;
+	char	*mem;
+	char	*data;
+	int		size_data;
 
+	join_data(binary, frequency, &data, &size_data);
+	printf("binary: %s\nletters: %s\nsize_data: %d\n", data, (data) + strlen(data) + 1, size_data);
 	key = get_key();
-	shmid = get_block(key, strlen(binary) + 1);
-	buff = shmat(shmid, NULL, 0);
-	ft_memmove(buff, binary, strlen(binary) + 1);
+	shmid = get_block(key, size_data);
+	mem = shmat(shmid, NULL, 0);
+	ft_memmove(mem, data, size_data);
 }
