@@ -62,5 +62,8 @@ char	*encode_to_char(t_lst *frequency, char *text);
 
 //shm
 void	share_memory(char *binary, t_lst *frequency);
+char	**create_code_array(t_lst *frequency);
+char	*create_letter_array(t_lst *frequency);
+void	join_data(char *binary, t_lst *frequency, char **data, int *data_size);
 
 #endif

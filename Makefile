@@ -1,27 +1,33 @@
+#------------------- common ---------------------------
+
+SRC_COMMON			=	lst_new.c \
+						lst_find.c \
+						lst_push.c \
+						lst_size.c \
+						lst_clear.c \
+
 #------------------- encoder ------------------------
 
 SRC_ENCODER			=	encoder.c \
 						read_file.c \
-						lst_new.c \
-						lst_find.c \
-						lst_push.c \
-						lst_size.c \
 						get_frequency.c \
 						new_node.c \
 						get_nodes.c \
 						order_nodes.c \
 						create_tree.c \
 						huffman_code.c \
-						lst_clear.c \
 						clear_tree.c \
 						get_text.c \
 						encode_text.c \
 						share_memory.c \
+						create_code_array.c \
+						create_letter_array.c \
+						join_data.c \
 
 
 OBJS_DIR_ENCODER		=	objects_encoder
 
-OBJS_ENCODER			=	$(patsubst %.c,objects_encoder/%.o, $(SRC_ENCODER))
+OBJS_ENCODER			=	$(patsubst %.c,objects_encoder/%.o, $(SRC_ENCODER) $(SRC_COMMON))
 
 NAME_ENCODER			=	encoder
 
@@ -31,13 +37,16 @@ NAME_ENCODER			=	encoder
 
 SRC_DECODER			=	decoder.c \
 						read_memory.c \
+						recreate_dictionary.c \
 						
 
+
+#------------------------------------------------------
 
 
 OBJS_DIR_DECODER		=	objects_decoder
 
-OBJS_DECODER			=	$(patsubst %.c,objects_decoder/%.o, $(SRC_DECODER))
+OBJS_DECODER			=	$(patsubst %.c,objects_decoder/%.o, $(SRC_DECODER) $(SRC_COMMON))
 
 NAME_DECODER			=	decoder
 
