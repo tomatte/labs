@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 17:30:28 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/11 18:21:20 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/12 09:50:06 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	asign_codes(char *data, t_lst *dictionary)
 	}
 }
 
-t_lst	*recreate_dictionary(char *data)
+t_lst	*recreate_dictionary(unsigned char *data)
 {
 	t_lst	*dictionary;
 

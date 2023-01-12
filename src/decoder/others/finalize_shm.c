@@ -6,13 +6,13 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 19:10:49 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/11 19:21:23 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/12 09:51:24 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../decoder.h"
 
-void	finalize_shm(char *mem)
+void	finalize_shm(unsigned char *data)
 {
 	int		shmid;
 	key_t	key;

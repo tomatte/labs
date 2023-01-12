@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 19:15:34 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/11 19:20:30 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/12 09:49:10 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static void	print_dic(t_lst *dic)
 
 int	main(void)
 {
-	char	*data;
-	char	*text;
-	t_lst	*dictionary;
+	unsigned char	*data;
+	char			*text;
+	t_lst			*dictionary;
 
 	read_memory(&data);
 	dictionary = recreate_dictionary(data);

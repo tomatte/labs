@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:59:32 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/11 21:31:49 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/12 09:48:38 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ key_t	get_block(key_t key)
 	return (shmid);
 }
 
-void	read_memory(char **data)
+void	read_memory(unsigned char **data)
 {
 	key_t			key;
 	int				shmid;

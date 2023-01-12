@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 18:22:04 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/11 19:26:51 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/12 09:50:58 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	get_minimum_size(t_lst *dictionary)
 	return (size);
 }
 
-char	*decode_text(char *data, t_lst *dictionary)
+char	*decode_text(unsigned char *data, t_lst *dictionary)
 {
 	char	*binary;
 	char	*text;
