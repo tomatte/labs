@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 19:10:49 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/12 14:52:22 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/12 15:49:59 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static void	send_response(int key)
 	response = strdup("ESSA EH A RESPOSTA!\n");
 	shmid = shmget(key, strlen(response) + 1, 0644 | IPC_CREAT);
 	mem = shmat(shmid, NULL, 0);
-	
 	ft_memmove(mem, response, strlen(response) + 1);
+	free(response);
 }
 
 void	finalize_shm(unsigned char *data)

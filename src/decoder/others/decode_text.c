@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 18:22:04 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/12 10:35:39 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/12 15:49:16 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,8 @@ static void	recreate_binary(char **binary, unsigned char *data)
 
 char	*decode_text(unsigned char *data, t_lst *dictionary)
 {
-	unsigned char	*compressed;
 	char			*binary;
+	char			*ref;
 	char			*text;
 	int				i;
 	int				size;
@@ -138,6 +138,7 @@ char	*decode_text(unsigned char *data, t_lst *dictionary)
 
 	text = strdup("");
 	recreate_binary(&binary, data);
+	ref = binary;
 	min = get_minimum_size(dictionary);
 	i = 0;
 	size = min;
@@ -149,5 +150,6 @@ char	*decode_text(unsigned char *data, t_lst *dictionary)
 		binary += size;
 		size = min;
 	}
+	free(ref);
 	return (text);
 }
