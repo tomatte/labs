@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 19:10:49 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/12 09:51:24 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/12 10:00:45 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ void	finalize_shm(unsigned char *data)
 
 	key = get_key();
 	shmid = get_block(key);
-	shmdt(mem);
+	shmdt(data);
 	shmctl(shmid, IPC_RMID, NULL);
 }
