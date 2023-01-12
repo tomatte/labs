@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:59:32 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/12 09:48:38 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/12 10:36:16 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,5 @@ void	read_memory(unsigned char **data)
 
 	key = get_key();
 	shmid = get_block(key);
-	printf("read shmid: %d\n", shmid);
 	*data = shmat(shmid, NULL, 0);
 }
