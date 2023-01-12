@@ -57,13 +57,16 @@ void	order_nodes(t_tree **nodes, int size);
 t_tree	*create_tree(t_tree **nodes, int size);
 void	huffman_code(t_tree *tree, char *bits, t_lst *lst);
 char	*get_text(char *filename);
-char	*encode_text(t_lst *frequency, char *text);
-char	*encode_to_char(t_lst *frequency, char *text);
+char	*encode_to_binary(t_lst *frequency, char *text);
+unsigned char	*compress_text(t_lst *frequency, char *text);
 
 //shm
-void	share_memory(char *binary, t_lst *frequency);
+void	share_memory(unsigned char *compressed, t_lst *frequency);
 char	**create_code_array(t_lst *frequency);
 char	*create_letter_array(t_lst *frequency);
-void	join_data(char *binary, t_lst *frequency, char **data, int *data_size);
+void	join_data(unsigned char *compressed, t_lst *frequency, unsigned char **data, int *size_data);
+
+//temp
+void	print_compressed_bin(unsigned char *compressed);
 
 #endif

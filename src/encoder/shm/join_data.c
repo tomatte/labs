@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:40:21 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/11 18:17:47 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/12 09:44:40 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	get_codes_size(char **codes, int size)
 	return (codes_size);
 }
 
-static void	add_codes_to_data(char **data, char **codes, int size, int position)
+static void	add_codes_to_data(unsigned char **data, char **codes, int size, int position)
 {
 	int	i;
 
@@ -49,28 +49,47 @@ static void	add_codes_to_data(char **data, char **codes, int size, int position)
 	}
 }
 
-void	join_data(char *binary, t_lst *frequency, char **data, int *data_size)
+static unsigned char	*alloc_or_die(int size)
+{
+	unsigned char	*data;
+	
+	data = (unsigned char *) malloc(size);
+	if (!data)
+	{
+		printf("Failed to alloc data in join_data.c\n");
+		exit(1);
+	}
+	return (data);
+}
+
+static int	get_size_compressed(unsigned char *compressed)
+{
+	int	size_compressed;
+
+	ft_memmove(&size_compressed, compressed, sizeof(int));
+	size_compressed += sizeof(int);
+	return (size_compressed);
+}
+
+void	join_data(unsigned char *compressed, t_lst *frequency, unsigned char **data, int *size_data)
 {
 	char	**codes;
 	char	*letters;
 	int		size_codes;
 	int		size_letters;
-	int		size_binary;
+	int		size_compressed;
 	int		position;
 
 	codes = create_code_array(frequency);
 	size_codes = get_codes_size(codes, lst_size(frequency));
 	size_letters = lst_size(frequency) + 1;
-	size_binary = ft_strlen(binary) + 1;
+	size_compressed = get_size_compressed(compressed); //testar
 	letters = create_letter_array(frequency);
-	*data = (char *) malloc(size_binary + size_letters + size_codes);
-	if (!*data)
-		return ;
-	position = 0;
-	ft_memmove((*data) + position, binary, size_binary);
-	position += size_binary;
+	*data = alloc_or_die(size_compressed + size_letters + size_codes);
+	ft_memmove((*data), compressed, size_compressed);
+	position = size_compressed;
 	ft_memmove((*data) + position, letters, size_letters);
 	position += size_letters;
 	add_codes_to_data(data, codes, lst_size(frequency), position);
-	*data_size = size_codes + size_letters + size_binary;
+	*size_data = size_codes + size_letters + size_compressed;
 }

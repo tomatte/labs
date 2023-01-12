@@ -1,40 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   encode_text.c                                      :+:      :+:    :+:   */
+/*   compress_text.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 12:17:06 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/12 08:30:30 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/12 09:42:40 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../encoder.h"
-
-static char	*join_and_free(char *s1, char *s2)
-{
-	char	*big;
-
-	if (!s1 || !s2)
-		return (NULL);
-	big = ft_strjoin(s1, s2);
-	free(s1);
-	return (big);
-}
-
-char	*encode_text(t_lst *frequency, char *text)
-{
-	char	*encoded;
-
-	encoded = strdup("");
-	while (*text)
-	{
-		encoded = join_and_free(encoded, lst_find(frequency, *text)->code);
-		text++;
-	}
-	return (encoded);
-}
 
 static void	ft_str_push_uchar(unsigned char **str, unsigned char c)
 {
@@ -76,23 +52,27 @@ static void	get_first_char(unsigned char **bits, char *binary)
 	ft_str_push_uchar(bits, (unsigned char) i);
 }
 
-static void	print_compressed_bin(unsigned char *bits, int size)
+void	print_compressed_bin(unsigned char *compressed)
 {
-	int	i;
-	int	j;
+	unsigned char	*bits;
+	int				size;
+	int				i;
+	int				j;
 
-	//printing compressed binary
-	//this structure can be used to read the compressed binary
+	ft_memmove(&size, compressed, sizeof(int));
+	bits = (unsigned char *) malloc(sizeof(char) * (size));
+	ft_memmove(bits, compressed + sizeof(int), size);
+	printf("\nsize: %d\n", size);
 	i = 1;
 	printf("compressed: ");
-	while (i <= size)
+	while (i < size)
 	{
 		j = 7;
 		while (j >= 0)
 		{
-			if (bits[0] == 0 && i == size)
+			if (bits[0] == 0 && i == size - 1)
 				break ;
-			if (i == size)
+			if (i == size - 1)
 				bits[0]--;
 			if (bits[i] & (1 << j))
 				printf("1");
@@ -100,17 +80,18 @@ static void	print_compressed_bin(unsigned char *bits, int size)
 				printf("0");
 			j--;
 		}
-		if (bits[0] == 0 && i == size)
+		if (bits[0] == 0 && i == size - 1)
 			break ;
 		i++;
 	}
+	printf("\n");
 }
 
-static char	*encapsulate_compressed_data(unsigned char *bits, int size)
+static unsigned char	*encapsulate_compressed_data(unsigned char *bits, int size)
 {
-	char	*encapsulated;
+	unsigned char	*encapsulated;
 
-	encapsulated =(char *) malloc(sizeof(char) * size + sizeof(int));
+	encapsulated = (unsigned char *) malloc(sizeof(char) * size + sizeof(int));
 	if (!encapsulated)
 	{
 		printf("Encapsulated malloc failed.\n");
@@ -121,7 +102,7 @@ static char	*encapsulate_compressed_data(unsigned char *bits, int size)
 	return (encapsulated);
 }
 
-char	*encode_to_char(t_lst *frequency, char *text)
+unsigned char	*compress_text(t_lst *frequency, char *text)
 {
 	char			*binary;
 	unsigned char	*bits;
@@ -130,7 +111,7 @@ char	*encode_to_char(t_lst *frequency, char *text)
 	int				i;
 	int				j;
 
-	binary = encode_text(frequency, text);
+	binary = encode_to_binary(frequency, text);
 	init_vars(&bits, &i, &n, &size);
 	get_first_char(&bits, binary);
 	while (binary[i])
@@ -147,5 +128,6 @@ char	*encode_to_char(t_lst *frequency, char *text)
 		size++;
 		n = 0;
 	}
+	printf("str binary: %s\n", binary);
 	return (encapsulate_compressed_data(bits, size + 1));
 }

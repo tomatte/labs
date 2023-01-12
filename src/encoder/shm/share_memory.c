@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 08:00:57 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/11 21:42:19 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/12 09:39:52 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ static key_t	get_block(key_t key, int size)
 	return (shmid);
 }
 
-void	share_memory(char *binary, t_lst *frequency)
+void	share_memory(unsigned char *compressed, t_lst *frequency)
 {
-	int		shmid;
-	key_t	key;
-	char	*mem;
-	char	*data;
-	int		size_data;
+	unsigned char	*mem;
+	unsigned char	*data;
+	key_t			key;
+	int				shmid;
+	int				size_data;
 
-	join_data(binary, frequency, &data, &size_data);
+	join_data(compressed, frequency, &data, &size_data);
 	key = get_key();
 	shmid = get_block(key, size_data);
 	mem = shmat(shmid, NULL, 0);

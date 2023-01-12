@@ -18,11 +18,13 @@ SRC_ENCODER			=	encoder.c \
 						huffman_code.c \
 						clear_tree.c \
 						get_text.c \
-						encode_text.c \
 						share_memory.c \
 						create_code_array.c \
 						create_letter_array.c \
 						join_data.c \
+						encode_to_binary.c \
+						compress_text.c \
+
 
 
 OBJS_DIR_ENCODER		=	objects_encoder
@@ -102,5 +104,9 @@ fclean:	clean
 	make -C ./libft fclean
 
 re: fclean all
+
+push:
+	git push
+	git push 42 main
 
 .PHONY:	all clean fclean re
