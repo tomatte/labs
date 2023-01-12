@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 19:15:34 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/12 15:44:46 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/12 18:42:31 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ static void	print_dic(t_lst *dic)
 	}
 }
 
-static void	clear_all(t_lst *lst, void *data, void *text)
+static void	clear_all(t_lst *lst, void *text)
 {
 	lst_clear(lst);
-	free(data);
 	free(text);
 }
 
@@ -37,8 +36,7 @@ int	main(void)
 	read_memory(&data);
 	dictionary = recreate_dictionary(data);
 	text = decode_text(data, dictionary);
-	printf("%s\n", text);
-	finalize_shm(data);
-	clear_all(dictionary, (void *) data, (void *) text);
+	finalize_shm(data, text);
+	clear_all(dictionary, (void *) text);
 	return (0);
 }

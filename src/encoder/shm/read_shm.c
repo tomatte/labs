@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:33:14 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/12 14:51:44 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/12 18:38:30 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	read_shm(int key)
 
 	shmid = get_block(key);
 	data = shmat(shmid, NULL, 0);
-	printf("reading from shm: %s\n", data);
+	printf("%s\n", data);
 	shmdt(data);
 	shmctl(shmid, IPC_RMID, NULL);
 }
