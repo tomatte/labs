@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   finalize_shm.c                                     :+:      :+:    :+:   */
+/*   read_shm.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 19:10:49 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/12 14:52:22 by dbrandao         ###   ########.fr       */
+/*   Created: 2023/01/12 14:33:14 by dbrandao          #+#    #+#             */
+/*   Updated: 2023/01/12 14:51:44 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../decoder.h"
+#include "../encoder.h"
 
-
-static void	send_response(int key)
+static key_t	get_block(key_t key)
 {
-	int		shmid;
-	char	*mem;
-	char	*response;
+	int	shmid;
 
-	response = strdup("ESSA EH A RESPOSTA!\n");
-	shmid = shmget(key, strlen(response) + 1, 0644 | IPC_CREAT);
-	mem = shmat(shmid, NULL, 0);
-	
-	ft_memmove(mem, response, strlen(response) + 1);
+	shmid = shmget(key, 0, 0);
+	if (shmid < 0)
+	{
+		printf("Block error at read_shm.c\n");
+		exit(1);
+	}
+	return (shmid);
 }
 
-void	finalize_shm(unsigned char *data)
+void	read_shm(int key)
 {
+	char	*data;
 	int		shmid;
-	key_t	key;
-	char	*response;
 
-	key = get_key();
 	shmid = get_block(key);
+	data = shmat(shmid, NULL, 0);
+	printf("reading from shm: %s\n", data);
 	shmdt(data);
 	shmctl(shmid, IPC_RMID, NULL);
-	send_response(key);
 }
