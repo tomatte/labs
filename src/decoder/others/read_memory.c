@@ -6,13 +6,13 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:59:32 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/11 17:42:28 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/11 21:31:49 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../decoder.h"
 
-static key_t	get_key()
+key_t	get_key(void)
 {
 	key_t	key;
 
@@ -25,7 +25,7 @@ static key_t	get_key()
 	return (key);
 }
 
-static key_t	get_block(key_t key)
+key_t	get_block(key_t key)
 {
 	int	shmid;
 

@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   decoder.c                                          :+:      :+:    :+:   */
+/*   finalize_shm.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 19:15:34 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/11 19:20:30 by dbrandao         ###   ########.fr       */
+/*   Created: 2023/01/11 19:10:49 by dbrandao          #+#    #+#             */
+/*   Updated: 2023/01/11 19:21:23 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./decoder.h"
+#include "../decoder.h"
 
-static void	print_dic(t_lst *dic)
+void	finalize_shm(char *mem)
 {
-	while (dic)
-	{
-		printf("%c\t(%s)\n", dic->c, dic->code);
-		dic = dic->next;
-	}
-}
+	int		shmid;
+	key_t	key;
 
-int	main(void)
-{
-	char	*data;
-	char	*text;
-	t_lst	*dictionary;
-
-	read_memory(&data);
-	dictionary = recreate_dictionary(data);
-	text = decode_text(data, dictionary);
-	printf("%s\n", text);
-	finalize_shm(data);
-	return (0);
+	key = get_key();
+	shmid = get_block(key);
+	shmdt(mem);
+	shmctl(shmid, IPC_RMID, NULL);
 }

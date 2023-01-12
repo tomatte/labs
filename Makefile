@@ -38,6 +38,8 @@ NAME_ENCODER			=	encoder
 SRC_DECODER			=	decoder.c \
 						read_memory.c \
 						recreate_dictionary.c \
+						decode_text.c \
+						finalize_shm.c \
 						
 
 
