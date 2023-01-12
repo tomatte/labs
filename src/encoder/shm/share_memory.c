@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 08:00:57 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/12 09:39:52 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/12 15:29:43 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ static key_t	get_block(key_t key, int size)
 {
 	int	shmid;
 
-	shmid = shmget(key, size, 0644 | IPC_CREAT);
+	shmid = shmget(key, size, 0644 | IPC_CREAT | IPC_EXCL);
 	if (shmid < 0)
 	{
-		printf("Block error!\n");
-		exit(1);
+		read_shm(key);
+		return (-1);
 	}
 	return (shmid);
 }
@@ -49,6 +49,12 @@ void	share_memory(unsigned char *compressed, t_lst *frequency)
 	join_data(compressed, frequency, &data, &size_data);
 	key = get_key();
 	shmid = get_block(key, size_data);
+	if (shmid < 0)
+	{
+		free(data);
+		return ;
+	}
 	mem = shmat(shmid, NULL, 0);
 	ft_memmove(mem, data, size_data);
+	free(data);
 }

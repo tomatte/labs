@@ -24,6 +24,7 @@ SRC_ENCODER			=	encoder.c \
 						join_data.c \
 						encode_to_binary.c \
 						compress_text.c \
+						read_shm.c \
 
 
 

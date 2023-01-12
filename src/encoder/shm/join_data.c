@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:40:21 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/12 09:44:40 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/12 15:38:13 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,20 @@ static int	get_size_compressed(unsigned char *compressed)
 	return (size_compressed);
 }
 
+static void	clear_data(char *letters, char **codes, int size)
+{
+	int	i;
+
+	free(letters);
+	i = 0;
+	while (i < size)
+	{
+		free(codes[i]);
+		i++;
+	}
+	free(codes);
+}
+
 void	join_data(unsigned char *compressed, t_lst *frequency, unsigned char **data, int *size_data)
 {
 	char	**codes;
@@ -92,4 +106,5 @@ void	join_data(unsigned char *compressed, t_lst *frequency, unsigned char **data
 	position += size_letters;
 	add_codes_to_data(data, codes, lst_size(frequency), position);
 	*size_data = size_codes + size_letters + size_compressed;
+	clear_data(letters, codes, lst_size(frequency));
 }

@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 18:44:58 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/12 08:47:30 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/12 15:27:48 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,13 @@ static void	print_tree(t_tree *tree)
 	print_tree(tree->right);
 }
 
-static void	clear_all(t_lst *lst, t_tree *tree, t_tree **nodes, char *text)
+static void	clear_all(t_lst *lst, t_tree *tree, t_tree **nodes, char *text, char *compressed)
 {
 	free(text);
 	free(nodes);
 	lst_clear(lst);
 	clear_tree(tree);
+	free(compressed);
 }
 
 int	main(int argc, char **argv)
@@ -79,7 +80,7 @@ int	main(int argc, char **argv)
 	//encode_to_char(frequency, text);
 	//printf("encoded: %s\n", encoded);
 	share_memory(compressed, frequency);
-	clear_all(frequency, master, nodes, text);
+	clear_all(frequency, master, nodes, text, compressed);
 	//print_tree(master);
 	return (0);
 }

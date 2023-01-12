@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 12:17:06 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/12 09:42:40 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/12 15:34:35 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ static unsigned char	*encapsulate_compressed_data(unsigned char *bits, int size)
 	}
 	ft_memmove(encapsulated, &size, sizeof(int));
 	ft_memmove(encapsulated + sizeof(int),  bits, size);
+	free(bits);
 	return (encapsulated);
 }
 
@@ -128,6 +129,6 @@ unsigned char	*compress_text(t_lst *frequency, char *text)
 		size++;
 		n = 0;
 	}
-	printf("str binary: %s\n", binary);
+	free(binary);
 	return (encapsulate_compressed_data(bits, size + 1));
 }
