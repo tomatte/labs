@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 18:44:58 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/11 14:56:52 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/11 21:44:57 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	main(int argc, char **argv)
 	huffman_code(master, ft_strdup(""), frequency);
 	//print_lst(frequency);
 	encoded = encode_text(frequency, text);
+	encode_to_char(frequency, text);
 	//encode_to_char(frequency, text);
 	//printf("encoded: %s\n", encoded);
 	share_memory(encoded, frequency);

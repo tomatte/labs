@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 12:17:06 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/10 21:20:17 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/11 23:19:30 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,61 +55,104 @@ static void	add_char(unsigned char **bits, char n, int size)
 	*bits = new;
 }
 
+static void	ft_str_push_uchar(unsigned char **str, unsigned char c)
+{
+	size_t	len;
+	unsigned char	*s;
+	unsigned char	*new;
+
+	s = *str;
+	if (!str)
+		return ;
+	if (!s)
+		s = ft_strdup("");
+	len = ft_strlen(s);
+	new = (unsigned char *) malloc(len + 2);
+	if (!new)
+		return ;
+	ft_strlcpy(new, s, len + 1);
+	new[len] = c;
+	new[len + 1] = '\0';
+	free(s);
+	*str = new;
+}
+
+
 char	*encode_to_char(t_lst *frequency, char *text)
 {
 	char			*binary;
 	unsigned char	*bits;
 	unsigned char	n;
-	int		size;
-	int		i;
-	int		len;
-	int		j;
+	int				size;
+	int				i;
+	int				j;
 
 	binary = encode_text(frequency, text);
 	size = strlen(binary) - 1;
+	bits = NULL;
 	i = size + 1;
 	while (i >= 8)
 		i -= 8;
-	bits = NULL;
+	printf("enquanto i: %d\n", i);
+	ft_str_push_uchar(&bits, i);
 	i = 0;
 	n = 0;
-	len = 0;
-	while (size >= 0)
+	size = 0;
+	while (binary[i])
 	{
-		if (binary[size] == '1')
+		j = 7;
+		while (j >= 0 && binary[i])
 		{
-			n = n | (1 << i);
+			if (binary[i] == '1')
+				n = n | (1 << j);
+			j--;
+			i++;
 		}
-		i++;
-		if (i >= 8)
-		{
-			add_char(&bits, n, len);
-			len++;
-			i = 0;
-			n = 0;
-		}
-		size--;
-	}
-	printf("N: %d\n", n);
-	i = 0;
-	while (i < len)
-	{
-		printf("bit: %d\n", bits[i]);
-		i++;
-	}
-	i = 0;
-	while (i < len)
-	{
+		ft_str_push_uchar(&bits, n);
+		size++;
 		n = 0;
-		while (n < 8)
+	}
+
+
+	//printing unsigned chars
+	i = 0;
+	while (bits[i])
+	{
+		printf("%d\t", bits[i]);
+		i++;
+	}
+	printf("\n");
+	printf("size: %d\n", size);
+	//printing compressed binary
+	//this structure can be used to read the compressed binary
+	i = 1;
+	printf("first byte: %d\n", bits[0]);
+	while (bits[i])
+	{
+		size--;
+		j = 7;
+		while (j >= 0)
 		{
-			if (bits[i] & (1 << n))
+			if (bits[0] == 0)
+				break ;
+			if (size == 0)
+				bits[0]--;
+			if (bits[i] & (1 << j))
 				printf("1");
 			else
 				printf("0");
-			n++;
+			j--;
 		}
+		if (bits[0] == 0)
+			break ;
 		i++;
 	}
-	printf("\n%s\n", binary);
+
+	printf("\nbinary: %s\n", binary);
+	printf("N: %d\n", n);
 }
+
+/* 
+
+ 01010100
+ */

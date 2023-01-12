@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 08:00:57 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/11 17:47:48 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/11 21:42:19 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	share_memory(char *binary, t_lst *frequency)
 	int		size_data;
 
 	join_data(binary, frequency, &data, &size_data);
-	printf("binary: %s\nletters: %s\nsize_data: %d\n", data, (data) + strlen(data) + 1, size_data);
 	key = get_key();
 	shmid = get_block(key, size_data);
 	mem = shmat(shmid, NULL, 0);
