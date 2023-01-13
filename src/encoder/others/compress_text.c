@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 12:17:06 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/12 15:34:35 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/13 09:30:26 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,11 @@ static void	ft_str_push_uchar(unsigned char **str, unsigned char c)
 	new = (unsigned char *) malloc(len + 2);
 	if (!new)
 		return ;
-	ft_strlcpy(new, s, len + 1);
+	ft_memmove(new, s, len + 1);
 	new[len] = c;
 	new[len + 1] = '\0';
 	free(s);
 	*str = new;
-}
-
-static void	init_vars(unsigned char **bits, int *i, unsigned char *n, int *size)
-{
-	*bits = NULL;
-	*i = 0;
-	*n = 0;
-	*size = 0;
 }
 
 static void	get_first_char(unsigned char **bits, char *binary)
@@ -49,6 +41,8 @@ static void	get_first_char(unsigned char **bits, char *binary)
 	i = strlen(binary);
 	while (i >= 8)
 		i -= 8;
+	if (i == 0)
+		i = 255;
 	ft_str_push_uchar(bits, (unsigned char) i);
 }
 
@@ -101,6 +95,14 @@ static unsigned char	*encapsulate_compressed_data(unsigned char *bits, int size)
 	ft_memmove(encapsulated + sizeof(int),  bits, size);
 	free(bits);
 	return (encapsulated);
+}
+
+static void	init_vars(unsigned char **bits, int *i, unsigned char *n, int *size)
+{
+	*bits = NULL;
+	*i = 0;
+	*n = 0;
+	*size = 0;
 }
 
 unsigned char	*compress_text(t_lst *frequency, char *text)
