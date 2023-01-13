@@ -57,7 +57,7 @@ t_tree	**get_nodes(t_lst *frequency);
 void	order_nodes(t_tree **nodes, int size);
 t_tree	*create_tree(t_tree **nodes, int size);
 void	huffman_code(t_tree *tree, char *bits, t_lst *lst);
-char	*get_text(char *filename);
+char	*get_text(int argc, char **argv);
 char	*encode_to_binary(t_lst *frequency, char *text);
 unsigned char	*compress_text(t_lst *frequency, char *text);
 

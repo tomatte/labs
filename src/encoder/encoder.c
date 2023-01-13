@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 18:44:58 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/13 09:29:59 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/13 12:12:33 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	main(int argc, char **argv)
 
 	if (argc <= 1)
 		exit_error();
-	text = get_text(argv[1]);
+	text = get_text(argc, argv);
 	frequency = get_frequency(text);
 	nodes = get_nodes(frequency);
 	master = create_tree(nodes, lst_size(frequency));
