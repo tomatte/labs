@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 09:59:32 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/12 14:35:18 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/13 10:46:48 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ key_t	get_key(void)
 	return (key);
 }
 
-key_t	get_block(key_t key)
+int	get_block(key_t key)
 {
 	int	shmid;
 
@@ -38,7 +38,7 @@ key_t	get_block(key_t key)
 	return (shmid);
 }
 
-void	read_memory(unsigned char **data)
+int	read_memory(unsigned char **data)
 {
 	key_t			key;
 	int				shmid;
@@ -46,4 +46,5 @@ void	read_memory(unsigned char **data)
 	key = get_key();
 	shmid = get_block(key);
 	*data = shmat(shmid, NULL, 0);
+	return (shmid);
 }

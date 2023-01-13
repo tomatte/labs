@@ -8,6 +8,7 @@
 # include <sys/types.h>
 # include <sys/ipc.h>
 # include <sys/shm.h>
+# include <unistd.h>
 # include "../../libft/libftprintf.h"
 
 typedef struct	s_lst
@@ -65,7 +66,7 @@ void	share_memory(unsigned char *compressed, t_lst *frequency);
 char	**create_code_array(t_lst *frequency);
 char	*create_letter_array(t_lst *frequency);
 void	join_data(unsigned char *compressed, t_lst *frequency, unsigned char **data, int *size_data);
-void	read_shm(int key);
+void	read_shm(void);
 
 //temp
 void	print_compressed_bin(unsigned char *compressed);

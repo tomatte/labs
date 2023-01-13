@@ -6,40 +6,63 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 19:10:49 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/12 18:43:16 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/13 10:53:18 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../decoder.h"
 
 
-static void	send_response(int key, char *text)
+static void	send_response(int key, char *text, int  shmid)
 {
-	int		shmid;
 	char	*mem;
-	char	*response;
-	char	*ref;
 
-	response = strdup("---------- DECODED MESSAGE ----------\n");
-	ref = response;
-	response = ft_strjoin(response, text);
-	shmid = shmget(key, strlen(response) + 1, 0644 | IPC_CREAT);
 	mem = shmat(shmid, NULL, 0);
-	ft_memmove(mem, response, strlen(response) + 1);
-	free(response);
-	free(ref);
+	ft_memmove(mem, text, strlen(text) + 1);
 }
 
-void	finalize_shm(unsigned char *data, char *text)
+static key_t	get_response_key(void)
+{
+	key_t	key;
+
+	key = ftok("./src/encoder/encoder.c", 1);
+	if (key < 0)
+	{
+		printf("Key error!\n");
+		exit(1);
+	}
+	return (key);
+}
+
+key_t	get_response_block(key_t key, int size)
+{
+	int	shmid;
+
+	shmid = shmget(key, size, 0644 | IPC_CREAT);
+	if (shmid < 0)
+	{
+		printf("Block error!\n");
+		exit(1);
+	}
+	return (shmid);
+}
+
+
+static void	remove_old_memory(unsigned char *data, int shmid)
+{
+	shmdt(data);
+	shmctl(shmid, IPC_RMID, NULL);
+}
+
+void	finalize_shm(unsigned char *data, char *text, int old_shmid)
 {
 	int		shmid;
 	key_t	key;
 	char	*response;
 
-	key = get_key();
-	shmid = get_block(key);
-	shmdt(data);
-	shmctl(shmid, IPC_RMID, NULL);
-	send_response(key, text);
-	printf("Message decoded and saved to shared memory. Now you can execute encoder program again.\n");
+	key = get_response_key();
+	shmid = get_response_block(key, ft_strlen(text) + 1);
+	remove_old_memory(data, old_shmid);
+	send_response(key, text, shmid);
+	printf("Message decoded and saved to shared memory.\n");
 }
