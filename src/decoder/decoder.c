@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 19:15:34 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/13 13:55:19 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/13 15:03:14 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,14 @@ int	main(void)
 	char			*text;
 	t_lst			*dictionary;
 	int				shmid;
+	t_time			mtime;
 
 	shmid = read_memory(&data);
 	dictionary = recreate_dictionary(data);
+	mtime.start = clock();
 	text = decode_text(data, dictionary);
-	add_info_to_text(&text, data);
+	mtime.end = clock();
+	add_info_to_text(&text, data, mtime);
 	finalize_shm(data, text, shmid);
 	clear_all(dictionary, (void *) text);
 	return (0);

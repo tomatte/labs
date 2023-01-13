@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 13:40:12 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/13 13:58:57 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/13 15:40:31 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,32 @@ static void	join_and_free(char **text, char *str)
 	*text = new;
 }
 
-void	add_info_to_text(char **text, unsigned char *data)
+static char	*get_exec_time(t_time mtime)
+{
+	double	exec_time;
+	char	exec_time_str[20];
+
+ 	exec_time = ((double) (mtime.end - mtime.start)) / CLOCKS_PER_SEC;
+	sprintf(exec_time_str, "%f", exec_time);
+	return (strdup(exec_time_str));
+}
+
+void	add_info_to_text(char **text, unsigned char *data, t_time mtime)
 {
 	char	*info;
+	char	*exec_time;
 	int		size_compressed;
 	int		size_text;
 
+	exec_time = get_exec_time(mtime);
 	ft_memmove(&size_compressed, data, sizeof(int));
 	size_text = strlen(*text);
 	info = strdup("\n\n-------- INFORMATION ABOUT DECODING PROCESS --------\nText full size: ");
 	join_and_free(&info, ft_itoa(size_text));
-	join_and_free(&info, strdup("\nCompressed size: "));
+	join_and_free(&info, strdup(" bytes\nCompressed size: "));
 	join_and_free(&info, ft_itoa(size_compressed));
-	join_and_free(&info, strdup("\n-------------------------------------------------------\n"));
+	join_and_free(&info, strdup(" bytes\nDecompression time: "));
+	join_and_free(&info, exec_time);
+	join_and_free(&info, strdup("s\n-------------------------------------------------------\n"));
 	join_and_free(text, info);
 }
