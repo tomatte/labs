@@ -43,6 +43,7 @@ SRC_DECODER			=	decoder.c \
 						recreate_dictionary.c \
 						decode_text.c \
 						finalize_shm.c \
+						add_info_to_text.c \
 						
 
 
@@ -108,6 +109,6 @@ re: fclean all
 
 push:
 	git push
-	git push 42 main
+	git push 42 master
 
 .PHONY:	all clean fclean re

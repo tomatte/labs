@@ -6,16 +6,11 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 18:22:04 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/13 09:31:28 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/13 13:40:50 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../decoder.h"
-
-static void	str_bit_cmp(char *str, unsigned char *bits)
-{
-
-}
 
 static char	find_letter(t_lst *dictionary, char *str, int *size)
 {

@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:33:14 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/13 10:56:27 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/13 14:00:02 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	read_shm(void)
 	data = shmat(shmid, NULL, 0);
 	printf("\n--------------- DECODED MESSAGE ---------------\n\n");
 	printf("%s\n", data);
-	printf("--------------- END OF MESSAGE ---------------\n\n");
 	shmdt(data);
 	shmctl(shmid, IPC_RMID, NULL);
 }

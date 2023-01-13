@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 12:10:21 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/13 12:32:55 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/13 13:30:41 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,7 @@ char	*get_text(int argc, char **argv)
 	while (i < argc)
 	{
 		join_and_free(&text, extract_text(argv[i]));
-		join_and_free(&text, strdup("\n"));
 		i++;
 	}
-	printf("text: %s\n", text);
 	return (text);
 }
