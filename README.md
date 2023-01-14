@@ -60,3 +60,34 @@ Essa função recebe um nó e a partir desse nó ela chama a si mesma para entra
 E nesse processo recursivo todas as folhas da árvore são alcançadas recebendo o seu código binário único.
 
 
+### Passo 6: comprimir texto
+Agora a função `unsigned char	*compress_text(t_lst *frequency, char *text)` irá comprimir o texto realizando o seguinte processo:
+1.	A lista de frequência (que também contém o Huffman code) será consultada pra cada caracter do texto e assim vamos gerando uma string com 0s e 1s que representa o texto em binário. Agora essa representação de binário será usada para realizar uma compressão real.
+2.	Obs: A compressão será realizada gravando os bits em chars, um char tem capacidade pra 8 bits, então um texto grande precisará de vários chars para armazenar todos os bits. Além disso, para que seja feita a descompressão é preciso saber a quantidade de chars e de bits, então será contado quantos chars serão usados pra armazenar o dado e também será armazenado quantos bits o último char terá e com essas informações a descompressão poderá ser feita. O primeiro char será usado pra armazenar a quantidade de bits do último char.
+3.	Para gravar os bits, a string contendo a representação em binário será consultada e as operações de bitwise serão usadas para gravar bit a bit nos chars. A gravação de bits é feita da esquerda pra direita, o que significa que um char começará ser modificado pelo seu 8º bit até chegar no 1º bit.
+4.	Após finalizar a gravação de bits, o dado gerado (lista de chars) será colocado junto com um inteiro que contém a informação do total de chars usados. No meu programa essa operação é chamada de encapsulamento e realizada pela função `static unsigned char	*encapsulate_compressed_data(unsigned char *bits, int size)`. No final teremos um array de chars que conterá nos primeiros 4 bytes um inteiro, no 5º um char da quantidade de bits do ultimo char e a partir do 6º byte será o texto comprimido.
+
+Essa etapa 6 foi muito legal de fazer, pois aprendi a manipular bits usando os operadores de bitwise. E pra finalizar eu só não acrescentei mais detalhes pra não precisar explicar linha a linha de um loop. Mas aqui não há segredos, tendo um entendimento dos operadores `&, |, <<` o restante é semelhante com a manipulação de arrays e a sequência de gravação de bits dependerá da lógica do programador.
+
+### Passo 7: compartilhamento de memória
+Para trabalhar com shared memory foram usadas as seguintes funções:
+```C
+/* Aloca um segmento de memória compartilhada que será usado para compartilhar dados entre processos
+* Essa função retorna o id do segmento alocado.
+*/
+int shmget(key_t key, size_t size, int shmflg);
+
+/* Anexa um endereço de memória do processo atual ao segmento de memória compartilhada.
+* essa memória é retornada e poderá ser usada para leitura ou escrita dependendo de suas permissões.
+*/
+void *shmat(int shmid, const void *shmaddr, int shmflg);
+
+int shmctl(int shmid, int cmd, struct shmid_ds *buf);
+```
+
+
+
+
+
+
+
