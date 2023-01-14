@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 18:44:58 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/14 10:25:30 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/14 13:54:19 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,12 @@ static void	clear_all(t_lst *lst, t_tree *tree, t_tree **nodes, char *text, void
 
 int	main(int argc, char **argv)
 {
-	char unsigned	*compressed;
+	unsigned char	*compressed;
+	unsigned char	*text;
+	t_segment		segment;
 	t_lst			*frequency;
 	t_tree			**nodes;
 	t_tree			*master;
-	char			*text;
 
 	if (argc <= 1)
 		exit_error();
@@ -77,6 +78,9 @@ int	main(int argc, char **argv)
 	huffman_code(master, ft_strdup(""), frequency);
 	compressed = compress_text(frequency, text);
 	share_memory(compressed, frequency);
+	segment = read_shm();
+	verify_text_integrity(segment.mem, text);
+	dettach_segment(segment);
 	clear_all(frequency, master, nodes, text, compressed);
 	return (0);
 }

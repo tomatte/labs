@@ -25,6 +25,8 @@ SRC_ENCODER			=	encoder.c \
 						encode_to_binary.c \
 						compress_text.c \
 						read_shm.c \
+						dettach_segment.c \
+						verify_text_integrity.c \
 
 
 
@@ -67,10 +69,11 @@ NAME		=	minitalk
 VPATH				=	./src/encoder \
 						./src/decoder \
 						./src/encoder/lst \
-						./src/encoder/others \
 						./src/encoder/tree \
 						./src/encoder/shm \
 						./src/decoder/others \
+						./src/encoder/text \
+						./src/encoder/huffman \
 
 $(OBJS_DIR_ENCODER)/%.o:	%.c
 							$(CC) $(CFLAGS) -c $< -o $@

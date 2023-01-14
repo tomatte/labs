@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 13:40:12 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/13 15:40:31 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/14 13:55:55 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ void	add_info_to_text(char **text, unsigned char *data, t_time mtime)
 	join_and_free(&info, ft_itoa(size_compressed));
 	join_and_free(&info, strdup(" bytes\nDecompression time: "));
 	join_and_free(&info, exec_time);
-	join_and_free(&info, strdup("s\n-------------------------------------------------------\n"));
+	join_and_free(&info, strdup("s\n"));
 	join_and_free(text, info);
 }

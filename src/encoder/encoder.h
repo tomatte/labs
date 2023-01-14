@@ -33,11 +33,11 @@ typedef struct	s_data
 	t_lst	*dictionary;
 }	t_data;
 
-typedef struct	s_test
+typedef struct	s_segment
 {
-	char	c;
-	int 	times;
-}	t_test;
+	void	*mem;
+	int		shmid;
+}	t_segment;
 
 //lst
 t_lst	*lst_new(char c);
@@ -62,11 +62,15 @@ char	*encode_to_binary(t_lst *frequency, char *text);
 unsigned char	*compress_text(t_lst *frequency, char *text);
 
 //shm
-void	share_memory(unsigned char *compressed, t_lst *frequency);
-char	**create_code_array(t_lst *frequency);
-char	*create_letter_array(t_lst *frequency);
-void	join_data(unsigned char *compressed, t_lst *frequency, unsigned char **data, int *size_data);
-void	read_shm(void);
+void		share_memory(unsigned char *compressed, t_lst *frequency);
+char		**create_code_array(t_lst *frequency);
+char		*create_letter_array(t_lst *frequency);
+void		join_data(unsigned char *compressed, t_lst *frequency, unsigned char **data, int *size_data);
+t_segment	read_shm(void);
+void		dettach_segment(t_segment segment);
+
+//text
+void	verify_text_integrity(unsigned char *decompressed, unsigned char *original);
 
 //temp
 void	print_compressed_bin(unsigned char *compressed);
