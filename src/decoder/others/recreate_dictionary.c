@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 17:30:28 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/12 09:59:45 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/14 10:33:45 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static int	get_position(unsigned char *data)
 
 static t_lst	*get_letters(unsigned char *data)
 {
-	t_lst	*dictionary;
-	char	*letters;
-	int		i;
-	int		position;
+	unsigned char	*letters;
+	t_lst			*dictionary;
+	int				i;
+	int				position;
 
 	position = get_position(data);
 	letters = data + position;
@@ -45,14 +45,14 @@ static void	asign_codes(unsigned char *data, t_lst *dictionary)
 
 	position = get_position(data);
 	data += position;
-	num = strlen(data);
-	data += strlen(data) + 1;
+	num = strlen((char *) data);
+	data += strlen((char *) data) + 1;
 	i = 0;
 	while (i < num)
 	{
-		dictionary->code = ft_strdup(data);
+		dictionary->code = ft_strdup((char *) data);
 		dictionary = dictionary->next;
-		data += ft_strlen(data) + 1;
+		data += ft_strlen((char *) data) + 1;
 		i++;
 	}
 }

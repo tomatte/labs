@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 08:29:46 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/10 12:10:31 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/13 17:09:19 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ static char	*join_and_free(char *s1, char *s2)
 
 void	huffman_code(t_tree *tree, char *bits, t_lst *lst)
 {
-	char	*aux;
-
 	if (!tree)
 		return ;
 	if (!tree->left && !tree->right)

@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 22:11:26 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/09 23:28:01 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/14 10:26:42 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static t_tree	**get_nodes_from_lst(t_lst *lst)
 	t_tree	**nodes;
 	int		size;
 	int		i;
-	t_tree	*test;
 
 	size = lst_size(lst);
 	nodes = (t_tree **) malloc(sizeof(t_tree *) * size);

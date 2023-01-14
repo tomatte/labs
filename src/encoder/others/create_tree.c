@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 23:21:02 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/09 23:49:58 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/14 10:26:57 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 t_tree	*create_tree(t_tree **nodes, int size)
 {
 	t_tree	*node;
-	int		i;
 
 	while (size >= 2)
 	{

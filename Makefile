@@ -60,7 +60,7 @@ NAME_DECODER			=	decoder
 
 LIBFT		=	./libft/libftprintf.a
 
-CFLAGS		=	-I./ -g
+CFLAGS		=	-I./ -g -Wall -Wextra
 
 NAME		=	minitalk
 

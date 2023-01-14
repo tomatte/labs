@@ -6,13 +6,13 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 18:22:04 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/13 13:40:50 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/14 10:44:02 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../decoder.h"
 
-static char	find_letter(t_lst *dictionary, char *str, int *size)
+static char	find_letter(t_lst *dictionary, char *str, size_t *size)
 {
 	while (dictionary)
 	{
@@ -26,9 +26,9 @@ static char	find_letter(t_lst *dictionary, char *str, int *size)
 	return ('\0');
 }
 
-int	get_minimum_size(t_lst *dictionary)
+static size_t	get_minimum_size(t_lst *dictionary)
 {
-	int	size;
+	size_t	size;
 
 	if (!dictionary)
 		return (0);
@@ -43,7 +43,7 @@ int	get_minimum_size(t_lst *dictionary)
 	return (size);
 }
 
-static void	print_compressed_binary(unsigned char *compressed, int size)
+/* static void	print_compressed_binary(unsigned char *compressed, int size)
 {
 	unsigned char	*bits;
 	int				i;
@@ -74,9 +74,9 @@ static void	print_compressed_binary(unsigned char *compressed, int size)
 		i++;
 	}
 	printf("\n");
-}
+} */
 
-static int	extract_compressed_data(unsigned char **compressed, unsigned char *data)
+/* static void	extract_compressed_data(unsigned char **compressed, unsigned char *data)
 {
 	int	size;
 
@@ -89,7 +89,7 @@ static int	extract_compressed_data(unsigned char **compressed, unsigned char *da
 		exit(1);
 	}
 	ft_memmove(*compressed, data, size);
-}
+} */
 
 static void	recreate_binary(char **binary, unsigned char *data)
 {
@@ -127,15 +127,13 @@ char	*decode_text(unsigned char *data, t_lst *dictionary)
 	char			*binary;
 	char			*ref;
 	char			*text;
-	int				i;
-	int				size;
-	int				min;
+	size_t			size;
+	size_t			min;
 
 	text = strdup("");
 	recreate_binary(&binary, data);
 	ref = binary;
 	min = get_minimum_size(dictionary);
-	i = 0;
 	size = min;
 	while (*binary)
 	{

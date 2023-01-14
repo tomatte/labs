@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 12:10:21 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/13 13:30:41 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/14 10:27:15 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	join_and_free(char **text, char *str)
 
 char	*get_text(int argc, char **argv)
 {
-	char	*aux;
 	char	*text;
 	int		i;
 	

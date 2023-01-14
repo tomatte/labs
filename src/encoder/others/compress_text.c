@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 12:17:06 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/13 09:30:26 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/14 10:29:19 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static void	ft_str_push_uchar(unsigned char **str, unsigned char c)
 	if (!str)
 		return ;
 	if (!s)
-		s = ft_strdup("");
-	len = ft_strlen(s);
+		s = (unsigned char *) ft_strdup("");
+	len = ft_strlen((char *) s);
 	new = (unsigned char *) malloc(len + 2);
 	if (!new)
 		return ;

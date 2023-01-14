@@ -6,14 +6,14 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 19:10:49 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/13 10:53:18 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/14 10:43:12 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../decoder.h"
 
 
-static void	send_response(int key, char *text, int  shmid)
+static void	send_response(char *text, int  shmid)
 {
 	char	*mem;
 
@@ -58,11 +58,10 @@ void	finalize_shm(unsigned char *data, char *text, int old_shmid)
 {
 	int		shmid;
 	key_t	key;
-	char	*response;
 
 	key = get_response_key();
 	shmid = get_response_block(key, ft_strlen(text) + 1);
 	remove_old_memory(data, old_shmid);
-	send_response(key, text, shmid);
+	send_response(text, shmid);
 	printf("Message decoded and saved to shared memory.\n");
 }

@@ -8,7 +8,6 @@ typedef struct	s_time
 {
 	clock_t	start;
 	clock_t	end;
-	double	time;
 }	t_time;
 
 int		read_memory(unsigned char **data);

@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 18:44:58 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/13 15:51:23 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/14 10:25:30 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	print_tree(t_tree *tree)
 	print_tree(tree->right);
 }
 
-static void	clear_all(t_lst *lst, t_tree *tree, t_tree **nodes, char *text, char *compressed)
+static void	clear_all(t_lst *lst, t_tree *tree, t_tree **nodes, char *text, void *compressed)
 {
 	free(text);
 	free(nodes);
@@ -62,11 +62,11 @@ static void	clear_all(t_lst *lst, t_tree *tree, t_tree **nodes, char *text, char
 
 int	main(int argc, char **argv)
 {
-	t_lst	*frequency;
-	t_tree	**nodes;
-	t_tree	*master;
-	char	*text;
-	char	*compressed;
+	char unsigned	*compressed;
+	t_lst			*frequency;
+	t_tree			**nodes;
+	t_tree			*master;
+	char			*text;
 
 	if (argc <= 1)
 		exit_error();
