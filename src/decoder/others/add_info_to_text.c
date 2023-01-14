@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 13:40:12 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/14 13:55:55 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/14 14:29:58 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	add_info_to_text(char **text, unsigned char *data, t_time mtime)
 	exec_time = get_exec_time(mtime);
 	ft_memmove(&size_compressed, data, sizeof(int));
 	size_text = strlen(*text);
-	info = strdup("\n\n-------- INFORMATION ABOUT DECODING PROCESS --------\nText full size: ");
+	info = strdup("\n\n-------------------- DATA ANALYSIS --------------------\nText full size: ");
 	join_and_free(&info, ft_itoa(size_text));
 	join_and_free(&info, strdup(" bytes\nCompressed size: "));
 	join_and_free(&info, ft_itoa(size_compressed));
