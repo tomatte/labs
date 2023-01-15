@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:40:21 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/15 12:55:57 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/15 13:21:27 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,19 @@ void	join_data(unsigned char *compressed, t_lst *frequency, unsigned char **data
 {
 	int		size_compressed;
 	int		size_nodes;
+	int		position;
+	int		len_nodes;
 
-	size_nodes = sizeof(t_tree) * lst_size(frequency);
+	print_nodes_copy(nodes_copy, lst_size(frequency));
+	len_nodes = lst_size(frequency);
+	size_nodes = sizeof(t_tree) * len_nodes;
 	size_compressed = get_size_compressed(compressed); //testar
-	*data = alloc_or_die(size_compressed + size_nodes);
+	*data = alloc_or_die(size_compressed + size_nodes + sizeof(int));
 	ft_memmove((*data), compressed, size_compressed);
-	ft_memmove((*data) + size_compressed, nodes_copy, size_nodes);
-	*size_data = size_nodes + size_compressed;
+	position = size_compressed;
+	ft_memmove((*data) + position, &len_nodes, sizeof(int));
+	position += sizeof(int);
+	ft_memmove((*data) + position, nodes_copy, size_nodes);
+	*size_data = size_nodes + size_compressed + sizeof(int);
 	free(nodes_copy);
 }

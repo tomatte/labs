@@ -17,5 +17,6 @@ key_t	get_key(void);
 int		get_block(key_t key);
 void	finalize_shm(unsigned char *data, char *text, int old_shmid);
 void	add_info_to_text(char **text, unsigned char *data, t_time mtime);
+t_tree	*recreate_tree(void *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 19:15:34 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/13 15:03:14 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/15 13:41:30 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,22 @@ static void	clear_all(t_lst *lst, void *text)
 	free(text);
 }
 
+static void	print_tree(t_tree *tree)
+{
+	if (!tree)
+		return ;
+	if (tree->c > 0)
+	{
+		printf("%c\t(%d)\n", tree->c, tree->times);
+	}
+	print_tree(tree->left);
+	print_tree(tree->right);
+}
+
 int	main(void)
 {
 	unsigned char	*data;
+	t_tree			*tree;
 	char			*text;
 	t_lst			*dictionary;
 	int				shmid;
@@ -37,6 +50,12 @@ int	main(void)
 
 	shmid = read_memory(&data);
 	dictionary = recreate_dictionary(data);
+	tree = recreate_tree((void *) data);
+
+	print_tree(tree);
+	shmdt(data);
+	shmctl(shmid, IPC_RMID, NULL);
+
 	mtime.start = clock();
 	text = decode_text(data, dictionary);
 	mtime.end = clock();
