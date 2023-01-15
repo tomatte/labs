@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 08:00:57 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/14 13:37:33 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/15 09:40:35 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ void	share_memory(unsigned char *compressed, t_lst *frequency)
 	mem = shmat(shmid, NULL, 0);
 	ft_memmove(mem, data, size_data);
 	printf("Message compressed and saved on shared memory!\n");
+	shmdt(mem);
 	free(data);
 }

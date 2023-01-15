@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 19:10:49 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/14 10:43:12 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/15 10:36:29 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	send_response(char *text, int  shmid)
 
 	mem = shmat(shmid, NULL, 0);
 	ft_memmove(mem, text, strlen(text) + 1);
+	shmdt(mem);
 }
 
 static key_t	get_response_key(void)
