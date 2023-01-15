@@ -49,6 +49,7 @@ void	lst_clear(t_lst *lst);
 //tree
 t_tree	*new_node(char c, int times);
 void	clear_tree(t_tree *tree);
+t_tree	*get_nodes_copy(t_tree **nodes, int size);
 
 //others
 t_lst	*get_frequency(char *text);

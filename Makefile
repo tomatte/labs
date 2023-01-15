@@ -27,6 +27,7 @@ SRC_ENCODER			=	encoder.c \
 						read_shm.c \
 						dettach_segment.c \
 						verify_text_integrity.c \
+						get_nodes_copy.c \
 
 
 
