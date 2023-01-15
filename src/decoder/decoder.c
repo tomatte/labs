@@ -6,38 +6,11 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 19:15:34 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/15 13:55:24 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/15 14:37:40 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./decoder.h"
-
-static void	print_dic(t_lst *dic)
-{
-	while (dic)
-	{
-		printf("%c\t(%s)\n", dic->c, dic->code);
-		dic = dic->next;
-	}
-}
-
-static void	clear_all(t_lst *lst, void *text)
-{
-	lst_clear(lst);
-	free(text);
-}
-
-static void	print_tree(t_tree *tree)
-{
-	if (!tree)
-		return ;
-	if (tree->c > 0)
-	{
-		printf("%c\t(%d)\n", tree->c, tree->times);
-	}
-	print_tree(tree->left);
-	print_tree(tree->right);
-}
 
 int	main(void)
 {
@@ -54,6 +27,6 @@ int	main(void)
 	mtime.end = clock();
 	add_info_to_text(&text, data, mtime);
 	finalize_shm(data, text, shmid);
-	//clear_all(dictionary, (void *) text);
+	free(text);
 	return (0);
 }

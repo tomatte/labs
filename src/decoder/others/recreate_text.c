@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 13:47:08 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/15 13:50:56 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/15 14:28:15 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,6 @@ static char	*mount_tree_text(t_tree *tree, unsigned char *compressed)
 char	*recreate_text(t_tree *tree, unsigned char *data)
 {
 	char	*text;
-	int		size;
-	int		i;
-	int		j;
 
 	text = mount_tree_text(tree, data);
 	return (text);

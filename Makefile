@@ -7,6 +7,7 @@ SRC_COMMON			=	lst_new.c \
 						lst_clear.c \
 						new_node.c \
 						order_nodes.c \
+						clear_tree.c \
 
 #------------------- encoder ------------------------
 
@@ -16,7 +17,6 @@ SRC_ENCODER			=	encoder.c \
 						get_nodes.c \
 						create_tree.c \
 						huffman_code.c \
-						clear_tree.c \
 						get_text.c \
 						share_memory.c \
 						create_code_array.c \

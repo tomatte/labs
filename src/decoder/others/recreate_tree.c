@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 12:58:30 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/15 13:43:44 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/15 14:28:39 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,6 @@ static int	get_size_compressed(unsigned char *compressed)
 	ft_memmove(&size_compressed, compressed, sizeof(int));
 	size_compressed += sizeof(int);
 	return (size_compressed);
-}
-
-static void	print_nodes_copy(t_tree *nodes_copy, int len)
-{
-	int	i;
-
-	i = 0;
-	while (i < len)
-	{
-		printf("node_copy: %c\t(%d)\n", nodes_copy[i].c, nodes_copy[i].times);
-		i++;
-	}
 }
 
 static t_tree	**get_nodes_from_data(void *data, int *len)

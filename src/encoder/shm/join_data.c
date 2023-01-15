@@ -6,20 +6,11 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:40:21 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/15 14:07:11 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/15 14:32:38 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../encoder.h"
-
-static void	print_codes(char **codes, int size)
-{
-	for (int i = 0; i < size; i++)
-	{
-		printf("codes[%d]: %s\n", i, codes[i]);
-	}
-	printf("array size: %d\n", size);
-}
 
 int	get_codes_size(char **codes, int size)
 {
@@ -34,19 +25,6 @@ int	get_codes_size(char **codes, int size)
 		i++;
 	}
 	return (codes_size);
-}
-
-static void	add_codes_to_data(unsigned char **data, char **codes, int size, int position)
-{
-	int	i;
-
-	i = 0;
-	while (i < size)
-	{
-		ft_memmove((*data) + position, codes[i], strlen(codes[i]) + 1);
-		position += strlen(codes[i]) + 1;
-		i++;
-	}
 }
 
 static unsigned char	*alloc_or_die(int size)
@@ -69,32 +47,6 @@ static int	get_size_compressed(unsigned char *compressed)
 	ft_memmove(&size_compressed, compressed, sizeof(int));
 	size_compressed += sizeof(int);
 	return (size_compressed);
-}
-
-static void	clear_data(char *letters, char **codes, int size)
-{
-	int	i;
-
-	free(letters);
-	i = 0;
-	while (i < size)
-	{
-		free(codes[i]);
-		i++;
-	}
-	free(codes);
-}
-
-static void	print_nodes_copy(t_tree *nodes_copy, int size)
-{
-	int	i;
-
-	i = 0;
-	while (i < size)
-	{
-		printf("node_copy: %c\t(%d)\n", nodes_copy[i].c, nodes_copy[i].times);
-		i++;
-	}
 }
 
 void	join_data(unsigned char *compressed, t_lst *frequency, unsigned char **data, int *size_data, t_tree *nodes_copy)

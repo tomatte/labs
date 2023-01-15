@@ -71,7 +71,7 @@ t_segment	read_shm(void);
 void		dettach_segment(t_segment segment);
 
 //text
-void	verify_text_integrity(unsigned char *decompressed, unsigned char *original);
+void	verify_text_integrity(char *decompressed, char *original);
 
 //temp
 void	print_compressed_bin(unsigned char *compressed);
