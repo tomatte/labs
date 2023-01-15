@@ -48,6 +48,7 @@ SRC_DECODER			=	decoder.c \
 						finalize_shm.c \
 						add_info_to_text.c \
 						recreate_tree.c \
+						recreate_text.c \
 						
 
 

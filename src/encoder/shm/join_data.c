@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:40:21 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/15 13:21:27 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/15 14:07:11 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	join_data(unsigned char *compressed, t_lst *frequency, unsigned char **data
 	int		position;
 	int		len_nodes;
 
-	print_nodes_copy(nodes_copy, lst_size(frequency));
 	len_nodes = lst_size(frequency);
 	size_nodes = sizeof(t_tree) * len_nodes;
 	size_compressed = get_size_compressed(compressed); //testar
