@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 18:44:58 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/14 13:54:19 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/15 14:05:45 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,18 @@ int	main(int argc, char **argv)
 	t_lst			*frequency;
 	t_tree			**nodes;
 	t_tree			*master;
+	t_tree			*nodes_copy;
 
 	if (argc <= 1)
 		exit_error();
 	text = get_text(argc, argv);
 	frequency = get_frequency(text);
 	nodes = get_nodes(frequency);
+	nodes_copy = get_nodes_copy(nodes, lst_size(frequency));
 	master = create_tree(nodes, lst_size(frequency));
 	huffman_code(master, ft_strdup(""), frequency);
 	compressed = compress_text(frequency, text);
-	share_memory(compressed, frequency);
+	share_memory(compressed, frequency, nodes_copy);
 	segment = read_shm();
 	verify_text_integrity(segment.mem, text);
 	dettach_segment(segment);

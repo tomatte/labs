@@ -49,6 +49,7 @@ void	lst_clear(t_lst *lst);
 //tree
 t_tree	*new_node(char c, int times);
 void	clear_tree(t_tree *tree);
+t_tree	*get_nodes_copy(t_tree **nodes, int size);
 
 //others
 t_lst	*get_frequency(char *text);
@@ -62,10 +63,10 @@ char	*encode_to_binary(t_lst *frequency, char *text);
 unsigned char	*compress_text(t_lst *frequency, char *text);
 
 //shm
-void		share_memory(unsigned char *compressed, t_lst *frequency);
+void	share_memory(unsigned char *compressed, t_lst *frequency, t_tree *nodes_copy);
 char		**create_code_array(t_lst *frequency);
 char		*create_letter_array(t_lst *frequency);
-void		join_data(unsigned char *compressed, t_lst *frequency, unsigned char **data, int *size_data);
+void	join_data(unsigned char *compressed, t_lst *frequency, unsigned char **data, int *size_data, t_tree *nodes_copy);
 t_segment	read_shm(void);
 void		dettach_segment(t_segment segment);
 

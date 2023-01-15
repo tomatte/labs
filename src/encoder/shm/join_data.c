@@ -6,7 +6,7 @@
 /*   By: dbrandao <dbrandao@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:40:21 by dbrandao          #+#    #+#             */
-/*   Updated: 2023/01/12 15:38:13 by dbrandao         ###   ########.fr       */
+/*   Updated: 2023/01/15 14:07:11 by dbrandao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,26 +85,34 @@ static void	clear_data(char *letters, char **codes, int size)
 	free(codes);
 }
 
-void	join_data(unsigned char *compressed, t_lst *frequency, unsigned char **data, int *size_data)
+static void	print_nodes_copy(t_tree *nodes_copy, int size)
 {
-	char	**codes;
-	char	*letters;
-	int		size_codes;
-	int		size_letters;
-	int		size_compressed;
-	int		position;
+	int	i;
 
-	codes = create_code_array(frequency);
-	size_codes = get_codes_size(codes, lst_size(frequency));
-	size_letters = lst_size(frequency) + 1;
+	i = 0;
+	while (i < size)
+	{
+		printf("node_copy: %c\t(%d)\n", nodes_copy[i].c, nodes_copy[i].times);
+		i++;
+	}
+}
+
+void	join_data(unsigned char *compressed, t_lst *frequency, unsigned char **data, int *size_data, t_tree *nodes_copy)
+{
+	int		size_compressed;
+	int		size_nodes;
+	int		position;
+	int		len_nodes;
+
+	len_nodes = lst_size(frequency);
+	size_nodes = sizeof(t_tree) * len_nodes;
 	size_compressed = get_size_compressed(compressed); //testar
-	letters = create_letter_array(frequency);
-	*data = alloc_or_die(size_compressed + size_letters + size_codes);
+	*data = alloc_or_die(size_compressed + size_nodes + sizeof(int));
 	ft_memmove((*data), compressed, size_compressed);
 	position = size_compressed;
-	ft_memmove((*data) + position, letters, size_letters);
-	position += size_letters;
-	add_codes_to_data(data, codes, lst_size(frequency), position);
-	*size_data = size_codes + size_letters + size_compressed;
-	clear_data(letters, codes, lst_size(frequency));
+	ft_memmove((*data) + position, &len_nodes, sizeof(int));
+	position += sizeof(int);
+	ft_memmove((*data) + position, nodes_copy, size_nodes);
+	*size_data = size_nodes + size_compressed + sizeof(int);
+	free(nodes_copy);
 }

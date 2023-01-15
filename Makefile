@@ -5,15 +5,15 @@ SRC_COMMON			=	lst_new.c \
 						lst_push.c \
 						lst_size.c \
 						lst_clear.c \
+						new_node.c \
+						order_nodes.c \
 
 #------------------- encoder ------------------------
 
 SRC_ENCODER			=	encoder.c \
 						read_file.c \
 						get_frequency.c \
-						new_node.c \
 						get_nodes.c \
-						order_nodes.c \
 						create_tree.c \
 						huffman_code.c \
 						clear_tree.c \
@@ -27,6 +27,7 @@ SRC_ENCODER			=	encoder.c \
 						read_shm.c \
 						dettach_segment.c \
 						verify_text_integrity.c \
+						get_nodes_copy.c \
 
 
 
@@ -46,6 +47,8 @@ SRC_DECODER			=	decoder.c \
 						decode_text.c \
 						finalize_shm.c \
 						add_info_to_text.c \
+						recreate_tree.c \
+						recreate_text.c \
 						
 
 
